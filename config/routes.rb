@@ -9,6 +9,12 @@ SampleApp::Application.routes.draw do
  resources :users
  match '/signup',  to: 'users#new',             via: 'get'
   
+ # root for sing-in sign-out
+ resources :sessions, only: [:new, :create, :destroy] 
+ 
+ match '/signin',  to: 'sessions#new',         via: 'get'
+ match '/signout', to: 'sessions#destroy',     via: 'delete'
+ 
   #get "static_pages/home"
   #get "static_pages/help"
   #get "static_pages/about"
