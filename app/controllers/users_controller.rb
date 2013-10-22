@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
-   before_filter :signed_in_user, only: [:edit, :update]
+   before_filter :signed_in_user, only: [:index, :edit, :update]
+   before_filter :correct_user,   only: [:edit, :update]
+  
+  
+  def index
+    @users = User.all
+  end
   
   def new
     @user = User.new
@@ -43,7 +49,10 @@ class UsersController < ApplicationController
                                    :password_confirmation)
     end
     
+    #Before filters
+    
     def signed_in_user
+      store_location
       redirect_to signin_url, notice: "Please sign in." unless signed_in?
     end
     
