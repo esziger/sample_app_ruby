@@ -15,6 +15,8 @@ SampleApp::Application.routes.draw do
  match '/signin',  to: 'sessions#new',         via: 'get'
  match '/signout', to: 'sessions#destroy',     via: 'delete'
  
+ mount HerokuConfigVars::Engine => "/heroku_config_vars"
+ 
   #get "static_pages/home"
   #get "static_pages/help"
   #get "static_pages/about"
