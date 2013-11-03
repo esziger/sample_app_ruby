@@ -17,6 +17,8 @@ SampleApp::Application.routes.draw do
  
  mount HerokuConfigVars::Engine => "/heroku_config_vars"
  
+ resources :microposts, only: [:create, :destroy]
+ 
   #get "static_pages/home"
   #get "static_pages/help"
   #get "static_pages/about"
