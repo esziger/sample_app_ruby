@@ -6,8 +6,13 @@ SampleApp::Application.routes.draw do
  match '/about',   to: 'static_pages#about',    via: 'get'
  match '/contact', to: 'static_pages#contact',  via: 'get'
  
- resources :users
  match '/signup',  to: 'users#new',             via: 'get'
+ 
+ resources :users do
+   member do
+      get :following, :followers
+    end
+  end
   
  # root for sing-in sign-out
  resources :sessions, only: [:new, :create, :destroy] 
@@ -18,6 +23,8 @@ SampleApp::Application.routes.draw do
  mount HerokuConfigVars::Engine => "/heroku_config_vars"
  
  resources :microposts, only: [:create, :destroy]
+ 
+ resources :relationships, only: [:create, :destroy]
  
   #get "static_pages/home"
   #get "static_pages/help"
